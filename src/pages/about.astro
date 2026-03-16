@@ -1,5 +1,6 @@
 ---
-const pageTitle = "About Me";
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "About Me Page";
 
 const identity = {
   firstName: "Michelle",
@@ -10,28 +11,38 @@ const identity = {
 
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 
+const myTools = ["VS Code", "GitHub", "Figma", "Notion", "Slack"];
+
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "crimson";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-		<a href="/">Astro</a>
-        <a href="/about/">About</a>
-        <a href="/copy/">Copy</a>
-		<a href="/blog/">Blog</a>
+	
+		<style is:global define:vars={{skillColor, fontWeight, textCase}}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+  .tool {
+	color: blue;
+	font-style: italic;
+  }
+</style>
+	
+
         
 
-        <h1>{pageTitle}</h1>
+ <BaseLayout pageTitle={pageTitle}>
         <h2>... and my new Astro site!</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
         <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
@@ -46,7 +57,7 @@ const goal = 3;
 		</ul>
 		<p>My skills are:</p>
 		<ul>
-			{skills.map((skill) => <li>{skill}</li>)}
+			{skills.map((skill) => <li class="skill">{skill}</li>)}
 		</ul>
 
 		{happy && <p>I am happy to be learning Astro!</p>}
@@ -55,5 +66,8 @@ const goal = 3;
 
 		{goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
 
-	</body>
-</html>
+		<p>My tools are:</p>
+		<ul>
+			{myTools.map((tool) => <li class="tool">{tool}</li>)}
+		</ul>
+	</BaseLayout>
